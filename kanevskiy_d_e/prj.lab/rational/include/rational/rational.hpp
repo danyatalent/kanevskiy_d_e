@@ -2,9 +2,6 @@
 #define RATIONAL_RATIONAL_HPP_20230215
 #include <iosfwd>
 
-int gcd(int lhs, int rhs);
-int lcm(int lhs, int rhs);
-
 class Rational
 {
 public:
