@@ -28,3 +28,9 @@ TEST_CASE("[rational] - Rational ctor") {
         CHECK_THROWS(Rational(4, -3) / Rational(0, 1));
     }
 }
+
+TEST_CASE("input/output") {
+    Rational z;
+    std::cin >> z;
+    std::cout << z;
+}

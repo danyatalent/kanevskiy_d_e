@@ -21,5 +21,4 @@ private:
     ptrdiff_t ssize_{ 0 };
     double* data_ = nullptr;
 };
-
 #endif
