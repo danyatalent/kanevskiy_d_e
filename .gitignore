@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 bin.dbg
-*.json
+/kanevskiy_d_e/CMakePresets.json
