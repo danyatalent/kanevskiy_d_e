@@ -61,6 +61,11 @@ Rational Rational::operator-(const Rational& rhs) {
     return Rational(num_ * rhs.denum_ - rhs.num_ * denum_, denum_ * rhs.denum_);
 }
 
+Rational& Rational::operator-() {
+    num_ = -num_;
+    return *this;
+}
+
 Rational Rational::operator*(const Rational& rhs) {
     return Rational(num_ * rhs.num_, denum_ * rhs.denum_);
 }

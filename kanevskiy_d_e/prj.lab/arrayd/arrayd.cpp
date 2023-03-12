@@ -47,10 +47,29 @@ const double& ArrayD::operator[](const std::ptrdiff_t indx) const {
     return data_[indx];
 }
 
-ArrayD& ArrayD::operator=(const ArrayD& rhs) {
-    data_ = rhs.data_;
-    ssize_ = rhs.ssize_;
-    return *this;
+void ArrayD::insert(const double value, const std::ptrdiff_t indx) {
+    if (indx > ssize_ || indx < 0) {
+        throw std::invalid_argument("index must be in size range");
+    }
+    this->resize(1 + ssize_);
+    if (indx != ssize_) {
+        for (std::ptrdiff_t i = ssize_ - 1; i > indx; i -= 1) {
+            data_[i] = data_[i - 1];
+        }
+    }
+    data_[indx] = value;
+}
+
+double& ArrayD::remove(const std::ptrdiff_t indx) {
+    if (indx < 0 || indx >= ssize_) {
+        throw std::invalid_argument("index must be in size range");
+    }
+    auto value = data_[indx];
+    for (std::ptrdiff_t i = indx; i < ssize_ - 1; i += 1) {
+        data_[i] = data_[i + 1];
+    }
+    ssize_ -= 1;
+    return value;
 }
 
 std::ptrdiff_t ArrayD::ssize() const noexcept {
