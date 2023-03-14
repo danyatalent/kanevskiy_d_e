@@ -69,7 +69,7 @@ double& ArrayD::remove(const std::ptrdiff_t indx) {
         data_[i] = data_[i + 1];
     }
     ssize_ -= 1;
-    return value;
+    return data_[indx];
 }
 
 std::ptrdiff_t ArrayD::ssize() const noexcept {

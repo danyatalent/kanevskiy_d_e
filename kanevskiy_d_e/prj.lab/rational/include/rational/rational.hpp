@@ -1,20 +1,29 @@
 #ifndef RATIONAL_RATIONAL_HPP_20230215
 #define RATIONAL_RATIONAL_HPP_20230215
 #include <iosfwd>
+#include <cstdint>
 
 class Rational
 {
 public:
     Rational() = default;
-    Rational(const int num);
+    Rational(const std::int32_t num);
     Rational(const Rational&) = default;
-    Rational(const int num, const int denum);
+    Rational(const std::int32_t num, const std::int32_t denum);
     ~Rational() = default;
     Rational& reduce();
     Rational& operator+=(const Rational& rhs);
     Rational& operator*=(const Rational& rhs);
     Rational& operator-=(const Rational& rhs);
     Rational& operator/=(const Rational& rhs);
+
+    Rational& operator+=(const std::int32_t& rhs);
+    Rational& operator-=(const std::int32_t& rhs);
+    Rational& operator*=(const std::int32_t& rhs);
+    Rational& operator/=(const std::int32_t& rhs);
+
+    Rational& operator++();
+    Rational& operator--();
     Rational operator+(const Rational& rhs) const;
     Rational operator-(const Rational& rhs);
     Rational& operator-();
