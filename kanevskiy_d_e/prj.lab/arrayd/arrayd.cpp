@@ -47,7 +47,7 @@ const double& ArrayD::operator[](const std::ptrdiff_t indx) const {
     return data_[indx];
 }
 
-void ArrayD::insert(const double value, const std::ptrdiff_t indx) {
+void ArrayD::insert(const std::ptrdiff_t indx, const double value) {
     if (indx > ssize_ || indx < 0) {
         throw std::invalid_argument("index must be in size range");
     }
@@ -60,7 +60,7 @@ void ArrayD::insert(const double value, const std::ptrdiff_t indx) {
     data_[indx] = value;
 }
 
-double& ArrayD::remove(const std::ptrdiff_t indx) {
+void ArrayD::remove(const std::ptrdiff_t indx) {
     if (indx < 0 || indx >= ssize_) {
         throw std::invalid_argument("index must be in size range");
     }
@@ -69,7 +69,6 @@ double& ArrayD::remove(const std::ptrdiff_t indx) {
         data_[i] = data_[i + 1];
     }
     ssize_ -= 1;
-    return data_[indx];
 }
 
 std::ptrdiff_t ArrayD::ssize() const noexcept {

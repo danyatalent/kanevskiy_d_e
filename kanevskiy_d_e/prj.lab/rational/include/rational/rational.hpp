@@ -39,10 +39,20 @@ public:
 
 
 private:
-    int num_{ 0 };
-    int denum_{ 1 };
+    std::int32_t num_{ 0 };
+    std::int32_t denum_{ 1 };
     static const char separator{ '/' };
 };
+
+Rational& operator+(const Rational& lhs, const std::int32_t rhs);
+Rational& operator-(const Rational& lhs, const std::int32_t rhs);
+Rational& operator*(const Rational& lhs, const std::int32_t rhs);
+Rational& operator/(const Rational& lhs, const std::int32_t rhs);
+
+Rational& operator+(const std::int32_t lhs, const Rational& rhs);
+Rational& operator-(const std::int32_t lhs, const Rational& rhs);
+Rational& operator*(const std::int32_t lhs, const Rational& rhs);
+Rational& operator/(const std::int32_t lhs, const Rational& rhs);
 
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs);
 std::istream& operator>>(std::istream& istrm, Rational& rhs);

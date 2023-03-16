@@ -15,11 +15,12 @@ public:
 
     ptrdiff_t ssize() const noexcept;
     void resize(const std::ptrdiff_t new_size);
-    void insert(const double value, const std::ptrdiff_t indx);
-    double& remove(const std::ptrdiff_t indx);
+    void insert(const std::ptrdiff_t indx, const double value);
+    void remove(const std::ptrdiff_t indx);
 
 private:
-    ptrdiff_t ssize_{ 0 };
+    std::ptrdiff_t ssize_{ 0 };
+    std::ptrdiff_t capacity_{ 0 };
     double* data_ = nullptr;
 };
 #endif

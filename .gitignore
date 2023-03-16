@@ -362,6 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-#bin.dbg
+bin.dbg
 /kanevskiy_d_e/CMakePresets.json
 .gitattributes

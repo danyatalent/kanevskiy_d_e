@@ -71,14 +71,14 @@ TEST_CASE("insert/remove") {
             arr[i] = i + 1;
         }
         CHECK_THROWS_AS(arr.insert(123, -1), std::invalid_argument&);
-        arr.insert(9, 3);
+        arr.insert(3, 9);
         CHECK(arr.ssize() == 7);
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
             if (i < 3) CHECK(arr[i] == i + 1);
             else if (i == 3) CHECK(arr[i] == 9);
             else CHECK(arr[i] == i);
         }
-        arr.insert(8, arr.ssize());
+        arr.insert(arr.ssize(), 8);
         CHECK(arr[7] == 8);
     }
     SUBCASE("remove") {
@@ -87,7 +87,7 @@ TEST_CASE("insert/remove") {
             arr[i] = i + 1;
         }
         CHECK_THROWS_AS(arr.remove(-1), std::invalid_argument&);
-        CHECK(arr.remove(3) == 4);
+        REQUIRE_NOTHROW(arr.remove(3));
         CHECK(arr.ssize() == 5);
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
             if (i < 3) CHECK(arr[i] == i + 1);
