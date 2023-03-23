@@ -6,8 +6,10 @@
 class ArrayD {
 public:
     ArrayD() = default;
-    ArrayD(const std::ptrdiff_t size);
-    ArrayD(const ArrayD&) = delete;
+    explicit ArrayD(const std::ptrdiff_t size = 0);
+    ArrayD(const ArrayD&);
+    ArrayD& operator=(const ArrayD&);
+
     ~ArrayD();
 
     double& operator[] (const std::ptrdiff_t indx);

@@ -7,11 +7,14 @@ class MatrixS {
 public:
     MatrixS() = default;
     MatrixS(const MatrixS& rhs);
-    MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns);
+    MatrixS& operator=(const MatrixS& rhs);
+
+    explicit MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns);
     ~MatrixS();
 
     int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column);
-    MatrixS& operator=(const MatrixS& rhs);
+    const int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) const;
+
     void resize(const std::ptrdiff_t new_rows, std::ptrdiff_t new_cols);
     std::ptrdiff_t cols() const noexcept;
     std::ptrdiff_t rows() const noexcept;

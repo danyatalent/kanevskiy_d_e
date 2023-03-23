@@ -20,6 +20,13 @@ int& MatrixS::at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) {
     return data_[row * columns_ + column];
 }
 
+const int& MatrixS::at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) const {
+    if (row >= rows_ || row < 0 || column >= columns_ || column < 0) {
+        throw std::invalid_argument("indexies must be in size range");
+    }
+    return data_[row * columns_ + column];
+}
+
 void MatrixS::resize(const std::ptrdiff_t new_rows, std::ptrdiff_t new_cols) {
 
 }

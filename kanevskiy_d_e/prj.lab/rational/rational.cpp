@@ -56,27 +56,12 @@ std::istream& Rational::readFrom(std::istream& istrm) {
 }
 
 // Algebra
-Rational Rational::operator+(const Rational& rhs) const {
-    return Rational(num_ * rhs.denum_ + rhs.num_ * denum_, denum_ * rhs.denum_);
-}
-
-Rational Rational::operator-(const Rational& rhs) {
-    return Rational(num_ * rhs.denum_ - rhs.num_ * denum_, denum_ * rhs.denum_);
-}
 
 Rational& Rational::operator-() {
     num_ = -num_;
     return *this;
 }
 
-Rational Rational::operator*(const Rational& rhs) {
-    return Rational(num_ * rhs.num_, denum_ * rhs.denum_);
-}
-
-Rational Rational::operator/(const Rational& rhs) {
-    if (rhs.num_ == 0) throw std::exception();
-    return Rational(num_ * rhs.denum_, denum_ * rhs.num_);
-}
 
 Rational& Rational::operator+=(const Rational& rhs)
 {
@@ -151,6 +136,62 @@ Rational& Rational::operator/=(const std::int32_t& rhs) {
     Rational rhs_rational(rhs);
     *this /= rhs_rational;
     return *this;
+}
+
+Rational operator+(const Rational& lhs, const Rational& rhs) {
+    auto res = Rational(lhs);
+    res += rhs;
+    return res;
+}
+
+Rational operator-(const Rational& lhs, const Rational& rhs) {
+    auto res = Rational(lhs);
+    res -= rhs;
+    return res;
+}
+
+Rational operator*(const Rational& lhs, const Rational& rhs) {
+    auto res = Rational(lhs);
+    res *= rhs;
+    return res;
+}
+
+Rational operator/(const Rational& lhs, const Rational& rhs) {
+    auto res = Rational(lhs);
+    res /= rhs;
+    return res;
+}
+
+Rational operator+(const Rational& lhs, const std::int32_t rhs) {
+    return lhs + Rational(rhs);
+}
+
+Rational operator-(const Rational& lhs, const std::int32_t rhs) {
+    return lhs - Rational(rhs);
+}
+
+Rational operator*(const Rational& lhs, const std::int32_t rhs) {
+    return lhs * Rational(rhs);
+}
+
+Rational operator/(const Rational& lhs, const std::int32_t rhs) {
+    return lhs / Rational(rhs);
+}
+
+Rational operator+(const std::int32_t lhs, const Rational& rhs) {
+    return Rational(lhs) + rhs;
+}
+
+Rational operator-(const std::int32_t lhs, const Rational& rhs) {
+    return Rational(lhs) - rhs;
+}
+
+Rational operator*(const std::int32_t lhs, const Rational& rhs) {
+    return Rational(lhs) * rhs;
+}
+
+Rational operator/(const std::int32_t lhs, const Rational& rhs) {
+    return Rational(lhs) / rhs;
 }
 
 // Comparsion

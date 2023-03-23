@@ -37,6 +37,22 @@ TEST_CASE("[rational] - Rational ctor") {
                 z /= 5;
                 CHECK(z == Rational(1, 3));
             }
+            SUBCASE("rational + int32_t") {
+                z = z + 2;
+                CHECK(z == Rational(11, 3));
+            }
+            SUBCASE("rational - int32_t") {
+                z = z - 1;
+                CHECK(z == Rational(2, 3));
+            }
+            SUBCASE("rational * int32_t") {
+                z = z * 2;
+                CHECK(z == Rational(10, 3));
+            }
+            SUBCASE("rational / int32_t") {
+                z = z / 5;
+                CHECK(z == Rational(1, 3));
+            }
                 
         }
     }

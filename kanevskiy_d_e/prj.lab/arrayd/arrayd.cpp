@@ -13,9 +13,27 @@ ArrayD::ArrayD(const std::ptrdiff_t size)
     data_ = new double[ssize_];
 }
 
+ArrayD::ArrayD(const ArrayD& arr) {
+    ssize_ = arr.ssize_;
+    auto* new_data = new double[ssize_];
+    auto copy_size = ssize_ * sizeof(double);
+    std::memcpy(new_data, arr.data_, copy_size);
+    data_ = new_data;
+}
+
+ArrayD& ArrayD::operator=(const ArrayD& rhs) {
+    if (data_ != rhs.data_) {
+        this->resize(rhs.ssize_);
+        auto copy_size = ssize_ * sizeof(double);
+        auto* new_data = new double[ssize_];
+        std::memcpy(new_data, rhs.data_, copy_size);
+        data_ = new_data;
+    }
+}
+
 void ArrayD::resize(const std::ptrdiff_t new_size) {
     if (new_size < 0) {
-        throw std::invalid_argument("new_size must be positive");
+        throw std::invalid_argument("new_size must be >= 0");
     }
     if (new_size == 0) {
         data_ = nullptr;
