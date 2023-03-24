@@ -6,7 +6,7 @@
 class ArrayD {
 public:
     ArrayD() = default;
-    explicit ArrayD(const std::ptrdiff_t size = 0);
+    explicit ArrayD(const std::ptrdiff_t size);
     ArrayD(const ArrayD&);
     ArrayD& operator=(const ArrayD&);
 

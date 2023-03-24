@@ -7,7 +7,7 @@ class Rational
 {
 public:
     Rational() = default;
-    explicit Rational(const std::int32_t num) noexcept;
+    explicit Rational(const std::int32_t num);
     Rational(const Rational&) = default;
     Rational(const std::int32_t num, const std::int32_t denum) ;
     ~Rational() = default;

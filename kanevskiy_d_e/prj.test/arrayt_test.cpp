@@ -1,9 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-#include <arrayd/arrayd.hpp>
+#include <arrayt/arrayt.hpp>
 
-//using ArrayD = ArrayT<double>;
+using ArrayD = ArrayT<double>;
 
 TEST_CASE("resize") {
     auto arr = ArrayD();

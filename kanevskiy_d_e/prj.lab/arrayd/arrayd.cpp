@@ -27,8 +27,10 @@ ArrayD& ArrayD::operator=(const ArrayD& rhs) {
         auto copy_size = ssize_ * sizeof(double);
         auto* new_data = new double[ssize_];
         std::memcpy(new_data, rhs.data_, copy_size);
+        delete[] data_;
         data_ = new_data;
     }
+    return *this;
 }
 
 void ArrayD::resize(const std::ptrdiff_t new_size) {

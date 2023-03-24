@@ -9,8 +9,17 @@ MatrixS::~MatrixS() {
 MatrixS::MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns)
     : rows_(rows)
     , columns_(columns)
+    , size_(std::make_tuple(rows, columns))
 {
     data_ = new int[rows * columns];
+}
+
+MatrixS::MatrixS(const size_type& size)
+    : rows_(std::get<0>(size)),
+    columns_(std::get<1>(size)),
+    size_(size)
+{
+    data_ = new int[rows_ * columns_];
 }
 
 int& MatrixS::at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) {
