@@ -3,7 +3,6 @@
 
 #include <arrayd/arrayd.hpp>
 
-//using ArrayD = ArrayT<double>;
 
 TEST_CASE("resize") {
     auto arr = ArrayD();
@@ -72,7 +71,7 @@ TEST_CASE("insert/remove") {
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
             arr[i] = i + 1;
         }
-        CHECK_THROWS_AS(arr.insert(123, -1), std::invalid_argument&);
+        CHECK_THROWS_AS(arr.insert(123, -1), std::out_of_range&);
         arr.insert(3, 9);
         CHECK(arr.ssize() == 7);
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
@@ -88,7 +87,7 @@ TEST_CASE("insert/remove") {
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
             arr[i] = i + 1;
         }
-        CHECK_THROWS_AS(arr.remove(-1), std::invalid_argument&);
+        CHECK_THROWS_AS(arr.remove(-1), std::out_of_range&);
         REQUIRE_NOTHROW(arr.remove(3));
         CHECK(arr.ssize() == 5);
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
