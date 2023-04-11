@@ -29,25 +29,23 @@ std::ostream& Rational::writeTo(std::ostream& ostrm) const {
     return ostrm;
 }
 
-std::istream& operator>>(std::istream& istrm, Rational& rhs) {
+std::istream& operator>>(std::stringstream& istrm, Rational& rhs) {
     return rhs.readFrom(istrm);
 }
 
-std::istream& Rational::readFrom(std::istream& istrm) {
-    int p(0);
-    int q(1);
+std::istream& Rational::readFrom(std::stringstream& istrm) {
+    int32_t p(0);
+    int32_t q(1);
     char divide(0);
-    istrm >> p;
-    istrm >> divide;
-    istrm >> q;
+    istrm >> p >> std::noskipws >> divide >> std::skipws >> std::noskipws >> q;
+    if (q < 0) {
+        istrm.setstate(std::ios_base::failbit);
+    }
     if (istrm.good() || !istrm.fail() && istrm.eof()) {
         if (Rational::separator == divide) {
-            istrm.clear();
+            //istrm.clear();
             *this = Rational(p, q);
         }
-        //if (q < 0) {
-          //  istrm.setstate(std::ios_base::failbit);
-        //}
         else {
             istrm.setstate(std::ios_base::failbit);
         }
