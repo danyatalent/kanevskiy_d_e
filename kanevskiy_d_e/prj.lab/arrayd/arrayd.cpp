@@ -44,10 +44,13 @@ void ArrayD::resize(const std::ptrdiff_t new_size) {
     else {
         auto* new_data = new double[new_size] {};
         if (data_ != nullptr) {
-            std::copy(data_, data_ + ssize_, new_data);
+            std::copy(data_, data_ + std::min(ssize_, new_size), new_data);
             delete[] data_;
         }
         data_ = new_data;
+        for (std::ptrdiff_t i = ssize_; i < new_size; i += 1) {
+            data_[i] = 0;
+        }
         ssize_ = new_size;
     }
 }

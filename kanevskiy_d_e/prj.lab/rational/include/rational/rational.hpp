@@ -36,7 +36,7 @@ public:
     bool operator!=(const Rational& rhs) const;
 
     std::ostream& writeTo(std::ostream& ostrm) const;
-    std::istream& readFrom(std::stringstream& istrm);
+    std::istream& readFrom(std::istream& istrm);
 
 
 private:
@@ -61,7 +61,7 @@ Rational operator*(const std::int32_t lhs, const Rational& rhs);
 Rational operator/(const std::int32_t lhs, const Rational& rhs);
 
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs);
-std::istream& operator>>(std::stringstream& istrm, Rational& rhs);
+std::istream& operator>>(std::istream& istrm, Rational& rhs);
 bool operator<(const Rational& lhs, const Rational& rhs);
 bool operator<=(const Rational& lhs, const Rational& rhs);
 bool operator>=(const Rational& lhs, const Rational& rhs);

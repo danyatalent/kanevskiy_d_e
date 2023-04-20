@@ -29,11 +29,11 @@ std::ostream& Rational::writeTo(std::ostream& ostrm) const {
     return ostrm;
 }
 
-std::istream& operator>>(std::stringstream& istrm, Rational& rhs) {
+std::istream& operator>>(std::istream& istrm, Rational& rhs) {
     return rhs.readFrom(istrm);
 }
 
-std::istream& Rational::readFrom(std::stringstream& istrm) {
+std::istream& Rational::readFrom(std::istream& istrm) {
     int32_t p(0);
     int32_t q(1);
     char divide(0);
