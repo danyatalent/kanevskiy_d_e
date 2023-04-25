@@ -12,10 +12,10 @@ public:
 
     ~ArrayD();
 
-    double& operator[] (const std::ptrdiff_t indx);
-    const double& operator[](const std::ptrdiff_t indx) const;
+    [[nodiscard]] double& operator[] (const std::ptrdiff_t indx);
+    [[nodiscard]] const double& operator[](const std::ptrdiff_t indx) const;
 
-    ptrdiff_t ssize() const noexcept;
+    [[nodiscard]] ptrdiff_t ssize() const noexcept;
     void resize(const std::ptrdiff_t new_size);
     void insert(const std::ptrdiff_t indx, const double value);
     void remove(const std::ptrdiff_t indx);

@@ -12,7 +12,12 @@ ArrayD::ArrayD(const std::ptrdiff_t size)
     : ssize_(size),
     capacity_(2 * size)
 {
-    data_ = new double[ssize_];
+    if (size < 0) {
+        throw std::invalid_argument("size must be >= 0");
+    }
+    else if (size != 0) {
+        data_ = new double[ssize_];
+    }
 }
 
 ArrayD::ArrayD(const ArrayD& arr) {
@@ -55,14 +60,14 @@ void ArrayD::resize(const std::ptrdiff_t new_size) {
     }
 }
 
-double& ArrayD::operator[](const std::ptrdiff_t indx) {
+[[nodiscard]] double& ArrayD::operator[](const std::ptrdiff_t indx) {
     if (indx < 0 || indx >= ssize_) {
         throw std::out_of_range("index must be in size range");
     }
     return data_[indx];
 }
 
-const double& ArrayD::operator[](const std::ptrdiff_t indx) const {
+[[nodiscard]] const double& ArrayD::operator[](const std::ptrdiff_t indx) const {
     if (indx < 0 || indx >= ssize_) {
         throw std::out_of_range("index must be in size range");
     }

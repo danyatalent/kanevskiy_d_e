@@ -38,7 +38,7 @@ std::istream& Rational::readFrom(std::istream& istrm) {
     int32_t q(1);
     char divide(0);
     istrm >> p >> std::noskipws >> divide >> std::skipws >> std::noskipws >> q;
-    if (q < 0) {
+    if (q <= 0) {
         istrm.setstate(std::ios_base::failbit);
     }
     if (istrm.good() || !istrm.fail() && istrm.eof()) {
@@ -92,15 +92,25 @@ Rational& Rational::operator*=(const Rational& rhs)
 }
 
 Rational& Rational::operator++() {
-    num_ += 1;
-    this->reduce();
+    *this += 1;
     return *this;
 }
 
+Rational& Rational::operator++(int) {
+    Rational tmp(*this);
+    ++(*this);
+    return tmp;
+}
+
 Rational& Rational::operator--() {
-    num_ -= 1;
-    this->reduce();
+    *this -= 1;
     return *this;
+}
+
+Rational& Rational::operator--(int){
+    Rational tmp(*this);
+    --(*this);
+    return tmp;
 }
 
 Rational& Rational::operator/=(const Rational& rhs)
@@ -109,6 +119,10 @@ Rational& Rational::operator/=(const Rational& rhs)
     num_ *= rhs.denum_;
     denum_ *= rhs.num_;
     this->reduce();
+    if (denum_ < 0) {
+        num_ = -num_;
+        denum_ = -denum_;
+    }
     return *this;
 }
 
@@ -195,6 +209,14 @@ Rational operator/(const std::int32_t lhs, const Rational& rhs) {
 // Comparsion
 bool Rational::operator==(const Rational& rhs) const {
     return (num_ == rhs.num_) && (denum_ == rhs.denum_);
+}
+
+bool operator==(const Rational& lhs, const std::int32_t rhs) {
+    return (lhs == Rational(rhs));
+}
+
+bool operator==(const std::int32_t lhs, const Rational& rhs) {
+    return (Rational(lhs) == rhs);
 }
 
 bool Rational::operator!=(const Rational& rhs) const {

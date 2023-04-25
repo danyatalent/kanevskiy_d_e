@@ -24,7 +24,9 @@ public:
     Rational& operator/=(const std::int32_t& rhs);
 
     Rational& operator++();
+    Rational& operator++(int);
     Rational& operator--();
+    Rational& operator--(int);
     /*Rational operator+(const Rational& rhs) const;
     Rational operator-(const Rational& rhs);
     Rational operator*(const Rational& rhs);
@@ -32,6 +34,7 @@ public:
     Rational& operator-();
 
     bool operator==(const Rational& rhs) const;
+    //bool operator==(const std::int32_t rhs);
     bool operator>(const Rational& rhs) const;
     bool operator!=(const Rational& rhs) const;
 
@@ -65,4 +68,6 @@ std::istream& operator>>(std::istream& istrm, Rational& rhs);
 bool operator<(const Rational& lhs, const Rational& rhs);
 bool operator<=(const Rational& lhs, const Rational& rhs);
 bool operator>=(const Rational& lhs, const Rational& rhs);
+bool operator==(const std::int32_t lhs, const Rational& rhs);
+bool operator==(const Rational& rhs, const std::int32_t lhs);
 #endif

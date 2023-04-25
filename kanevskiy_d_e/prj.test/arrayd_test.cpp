@@ -92,6 +92,13 @@ TEST_CASE("insert/remove") {
         CHECK_THROWS_AS(arr.insert(123, -1), std::out_of_range&);
         arr.insert(3, 9);
         CHECK(arr.ssize() == 7);
+        CHECK(arr[3] == 9);
+        SUBCASE("insert to 0 array") {
+            auto zero_arr = ArrayD();
+            zero_arr.insert(0, 1);
+            CHECK(zero_arr[0] == 1);
+            CHECK(zero_arr.ssize() == 1);
+        }
         for (std::ptrdiff_t i = 0; i < arr.ssize(); i += 1) {
             if (i < 3) CHECK(arr[i] == i + 1);
             else if (i == 3) CHECK(arr[i] == 9);
