@@ -13,10 +13,10 @@ public:
 
     ~ArrayT();
 
-    T& operator[] (const std::ptrdiff_t indx);
-    const T& operator[](const std::ptrdiff_t indx) const;
+    [[nodiscard]] T& operator[] (const std::ptrdiff_t indx);
+    [[nodiscard]] const T& operator[](const std::ptrdiff_t indx) const;
 
-    ptrdiff_t ssize() const noexcept;
+    [[nodiscard]] ptrdiff_t ssize() const noexcept;
     void resize(const std::ptrdiff_t new_size);
     void insert(const std::ptrdiff_t indx, const T value);
     void remove(const std::ptrdiff_t indx);
@@ -30,6 +30,7 @@ private:
 template <typename T>
 ArrayT<T>::ArrayT(const ArrayT& arr) {
     ssize_ = arr.ssize_;
+    data_ = new T[ssize_];
     std::copy(arr.data_, arr.data_ + arr.ssize_, data_);
 }
 
@@ -51,7 +52,7 @@ ArrayT<T>::~ArrayT() {
 }
 
 template <typename T>
-T& ArrayT<T>::operator[](const std::ptrdiff_t indx) {
+[[nodiscard]] T& ArrayT<T>::operator[](const std::ptrdiff_t indx) {
     if (indx < 0 || indx >= ssize_) {
         throw std::out_of_range("index must be in size range");
     }
@@ -59,7 +60,7 @@ T& ArrayT<T>::operator[](const std::ptrdiff_t indx) {
 }
 
 template <typename T>
-const T& ArrayT<T>::operator[](const std::ptrdiff_t indx) const {
+[[nodiscard]] const T& ArrayT<T>::operator[](const std::ptrdiff_t indx) const {
     if (indx < 0 || indx >= ssize_) {
         throw std::out_of_range("index must be in size range");
     }
@@ -67,7 +68,7 @@ const T& ArrayT<T>::operator[](const std::ptrdiff_t indx) const {
 }
 
 template<typename T>
-std::ptrdiff_t ArrayT<T>::ssize() const noexcept {
+[[nodiscard]] std::ptrdiff_t ArrayT<T>::ssize() const noexcept {
     return ssize_;
 }
 
@@ -107,13 +108,15 @@ void ArrayT<T>::resize(const std::ptrdiff_t new_size) {
         ssize_ = 0;
     }
     else {
-        auto* new_data = new T[new_size]{T()};
+        auto* new_data = new T[new_size] {};
         if (data_ != nullptr) {
-            auto copy_size = std::min(ssize_, new_size) * sizeof(T);
-            std::memcpy(new_data, data_, copy_size);
+            std::copy(data_, data_ + std::min(ssize_, new_size), new_data);
             delete[] data_;
         }
         data_ = new_data;
+        for (std::ptrdiff_t i = ssize_; i < new_size; i += 1) {
+            data_[i] = 0;
+        }
         ssize_ = new_size;
     }
 }
@@ -122,6 +125,11 @@ template <typename T>
 ArrayT<T>::ArrayT(const std::ptrdiff_t size)
     : ssize_(size)
 {
-    data_ = new T[ssize_] {T()};
+    if (size < 0) {
+        throw std::invalid_argument("size must be >= 0");
+    }
+    else {
+        data_ = new T[ssize_]{ T() };
+    }
 }
 #endif
