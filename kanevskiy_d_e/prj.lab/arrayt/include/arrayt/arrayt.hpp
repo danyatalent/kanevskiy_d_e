@@ -100,12 +100,8 @@ void ArrayT<T>::remove(const std::ptrdiff_t indx) {
 
 template <typename T>
 void ArrayT<T>::resize(const std::ptrdiff_t new_size) {
-    if (new_size < 0) {
+    if (new_size <= 0) {
         throw std::invalid_argument("new_size must be >= 0");
-    }
-    if (new_size == 0) {
-        data_ = nullptr;
-        ssize_ = 0;
     }
     else {
         auto* new_data = new T[new_size] {};
