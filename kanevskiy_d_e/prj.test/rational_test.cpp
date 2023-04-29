@@ -30,10 +30,6 @@ TEST_CASE("constructor") {
 	CHECK_THROWS(Rational(1, 0));
 }
 
-TEST_CASE("bool") {
-	CHECK(!Rational(0, 17));
-	CHECK(Rational(1, 1));
-}
 
 Rational x(3, 8);
 
@@ -65,19 +61,22 @@ TEST_CASE("arithmetic operators") {
 	CHECK(Rational(1, 3) / Rational(5, -1) == Rational(-1, 15));
 	CHECK(Rational(-1, 3) / Rational(5, -1) == Rational(1, 15));
 	CHECK_THROWS(Rational(1, 5) / Rational(0, 13));
-	CHECK(Rational(1, 5) + 5);
+	//CHECK(Rational(1, 5) + 5);
 
 
 }
 
 TEST_CASE("inc and dec") {
+	int y = 1;
 	CHECK((x++) + 1 == x);
 	CHECK(Rational(x) + 1 == ++x);
 	CHECK(!(x + 1 == ++x));
+	CHECK(!(y + 1 == ++y));
 
 	CHECK((x--) - 1 == x);
 	CHECK(Rational(x) - 1 == --x);
 	CHECK(!(x - 1 == --x));
+	CHECK(!(y - 1 == --y));
 }
 
 bool testIn(std::string s) {

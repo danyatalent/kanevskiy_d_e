@@ -9,19 +9,19 @@ public:
     using SizeType = std::tuple<std::ptrdiff_t, std::ptrdiff_t>;
     MatrixS() = default;
     explicit MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns);
-    explicit MatrixS(const SizeType& size = {0, 0});
-    MatrixS(const MatrixS& rhs);
-    MatrixS& operator=(const MatrixS& rhs);
+    explicit MatrixS(const SizeType& size);
+    MatrixS(const MatrixS&);
+    MatrixS& operator=(const MatrixS&);
 
     ~MatrixS();
 
-    int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column);
-    const int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) const;
+    [[nodiscard]] int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column);
+    [[nodiscard]] const int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) const;
 
-    int& at(const SizeType& elem);
-    const int& at(const SizeType& elem) const;
+    [[nodiscard]] int& at(const SizeType& elem);
+    [[nodiscard]] const int& at(const SizeType& elem) const;
 
-    void resize(const std::ptrdiff_t new_rows, std::ptrdiff_t new_cols);
+    void resize(const std::ptrdiff_t m, std::ptrdiff_t n);
     void resize(const SizeType& new_size);
 
     std::ptrdiff_t nCols() const noexcept;
