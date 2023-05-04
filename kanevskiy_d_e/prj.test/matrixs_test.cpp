@@ -24,6 +24,20 @@ TEST_CASE("constructor") {
         CHECK(matrix.ssize() == std::make_tuple(5, 3));
         CHECK(matrix.at(3, 2) == 0);
     }
+    SUBCASE("initializer list") {
+        auto matrix = MatrixS({ {1, 3, 4}, {2, 5, 6} });
+        CHECK(matrix.nCols() == 3);
+        CHECK(matrix.nRows() == 2);
+        CHECK(matrix.ssize() == std::make_tuple(2, 3));
+        CHECK(matrix.at(0, 0) == 1);
+        CHECK(matrix.at(1, 1) == 5);
+
+        auto matrix_empty = MatrixS({ {}, {}, {} });
+        CHECK(matrix_empty.nCols() == 0);
+        CHECK(matrix_empty.nRows() == 0);
+        CHECK(matrix_empty.ssize() == std::make_tuple(0, 0));
+
+    }
 }
 
 TEST_CASE("at method") {

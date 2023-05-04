@@ -1,7 +1,9 @@
 #include <matrixs/matrixs.hpp>
 
 #include <stdexcept>
+#include <vector>
 #include <cstring>
+#include <iostream>
 
 MatrixS::~MatrixS() {
     delete[] data_;
@@ -46,6 +48,33 @@ MatrixS::MatrixS(const SizeType& size)
     for (std::ptrdiff_t i = 0; i < rows_ * columns_; i += 1) {
         data_[i] = 0;
     }
+}
+
+MatrixS::MatrixS(std::initializer_list<std::initializer_list<int>> lst) {
+    if (lst.size() == 0 || lst.begin()->size() == 0) {
+        size_ = std::make_tuple(0, 0);
+        rows_ = 0;
+        columns_ = 0;
+        data_ = nullptr;
+    }
+    else {
+        rows_ = lst.size();
+        columns_ = lst.begin()->size();
+        size_ = std::make_tuple(rows_, columns_);
+        int i = 0;
+        int j = 0;
+        data_ = new int[rows_ * columns_];
+        for (const auto& l : lst) {
+            for (const auto& v : l) {
+                data_[i * columns_ + j] = v;
+                ++j;
+            }
+            j = 0;
+            ++i;
+        }
+    }
+
+
 }
 
 [[nodiscard]] int& MatrixS::at(const std::ptrdiff_t& row, const std::ptrdiff_t& column) {

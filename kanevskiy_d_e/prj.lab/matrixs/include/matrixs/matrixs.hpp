@@ -2,6 +2,7 @@
 #define MATRIXS_MATRIXS_HPP_2023
 
 #include <cstddef>
+#include <initializer_list>
 #include <tuple>
 
 class MatrixS {
@@ -12,6 +13,7 @@ public:
     explicit MatrixS(const SizeType& size);
     MatrixS(const MatrixS&);
     MatrixS& operator=(const MatrixS&);
+    MatrixS(std::initializer_list<std::initializer_list<int>> lst);
 
     ~MatrixS();
 
