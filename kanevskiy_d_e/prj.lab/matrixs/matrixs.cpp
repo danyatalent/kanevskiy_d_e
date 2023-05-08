@@ -39,6 +39,33 @@ MatrixS& MatrixS::operator=(const MatrixS& rhs) {
     return *this;
 }
 
+MatrixS::MatrixS(MatrixS&& mat)
+    : rows_(mat.rows_)
+    , columns_(mat.columns_)
+    , size_(mat.size_)
+    , data_(mat.data_)
+{
+    mat.rows_ = 0;
+    mat.columns_ = 0;
+    mat.size_ = { 0, 0 };
+    mat.data_ = nullptr;
+}
+
+MatrixS& MatrixS::operator=(MatrixS&& mat) {
+    if (this != &mat) {
+        rows_ = mat.rows_;
+        columns_ = mat.columns_;
+        size_ = mat.size_;
+        delete[] data_;
+        data_ = mat.data_;
+        mat.rows_ = 0;
+        mat.columns_ = 0;
+        mat.size_ = { 0 ,0 };
+        mat.data_ = nullptr;
+    }
+    return *this;
+}
+
 MatrixS::MatrixS(const SizeType& size)
     : rows_(std::get<0>(size)),
     columns_(std::get<1>(size)),

@@ -9,7 +9,9 @@ public:
     Rational() = default;
     explicit Rational(const std::int32_t num);
     Rational(const Rational&) = default;
-    Rational(const std::int32_t num, const std::int32_t denum) ;
+    Rational(const std::int32_t num, const std::int32_t denum);
+    Rational(Rational&& num) = default;
+    Rational& operator=(Rational&& num) = default;
     ~Rational() = default;
     Rational& reduce();
     Rational& operator+=(const Rational& rhs);

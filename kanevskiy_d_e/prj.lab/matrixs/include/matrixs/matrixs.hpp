@@ -15,6 +15,9 @@ public:
     MatrixS& operator=(const MatrixS&);
     MatrixS(std::initializer_list<std::initializer_list<int>> lst);
 
+    MatrixS(MatrixS&& mat);
+    MatrixS& operator=(MatrixS&& mat);
+    
     ~MatrixS();
 
     [[nodiscard]] int& at(const std::ptrdiff_t& row, const std::ptrdiff_t& column);

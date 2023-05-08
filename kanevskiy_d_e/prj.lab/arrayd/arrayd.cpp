@@ -27,6 +27,29 @@ ArrayD::ArrayD(const ArrayD& arr) {
     std::copy(arr.data_, arr.data_ + arr.ssize_, data_);
 }
 
+ArrayD::ArrayD(ArrayD&& arr)
+    : capacity_(arr.capacity_)
+    , ssize_(arr.ssize_)
+    , data_(arr.data_)
+{
+    arr.capacity_ = 0;
+    arr.ssize_ = 0;
+    arr.data_ = nullptr;
+}
+
+ArrayD& ArrayD::operator=(ArrayD&& arr) {
+    if (this != &arr) {
+        capacity_ = arr.capacity_;
+        ssize_ = arr.ssize_;
+        delete[] data_;
+        data_ = arr.data_;
+        arr.ssize_ = 0;
+        arr.capacity_ = 0;
+        arr.data_ = nullptr;
+    }
+    return *this;
+}
+
 ArrayD& ArrayD::operator=(const ArrayD& rhs) {
     if (data_ != rhs.data_) {
         this->resize(rhs.ssize_);

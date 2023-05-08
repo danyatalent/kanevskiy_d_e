@@ -9,6 +9,8 @@ public:
     explicit ArrayD(const std::ptrdiff_t size);
     ArrayD(const ArrayD&);
     ArrayD& operator=(const ArrayD&);
+    ArrayD(ArrayD&& arr);
+    ArrayD& operator=(ArrayD&& arr);
 
     ~ArrayD();
 

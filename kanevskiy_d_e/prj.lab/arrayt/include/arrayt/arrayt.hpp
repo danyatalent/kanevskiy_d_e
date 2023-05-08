@@ -11,6 +11,9 @@ public:
     ArrayT(const ArrayT&);
     ArrayT<T>& operator=(const ArrayT&);
 
+    ArrayT(ArrayT&& arr);
+    ArrayT<T>& operator=(ArrayT&& arr);
+
     ~ArrayT();
 
     [[nodiscard]] T& operator[] (const std::ptrdiff_t indx);
@@ -42,6 +45,27 @@ ArrayT<T>& ArrayT<T>::operator=(const ArrayT& rhs) {
         std::copy(rhs.data_, rhs.data_ + rhs.ssize_, new_data);
         delete[] data_;
         data_ = new_data;
+    }
+    return *this;
+}
+
+template <typename T>
+ArrayT<T>::ArrayT(ArrayT&& arr) 
+    : ssize_(arr.ssize_)
+    , data_(arr.data_)
+{
+    arr.ssize_ = 0;
+    arr.data_ = nullptr;
+}
+
+template <typename T>
+ArrayT<T>& ArrayT<T>::operator=(ArrayT&& arr) {
+    if (this != &arr) {
+        ssize_ = arr.ssize_;
+        delete[] data_;
+        data_ = arr.data_;
+        arr.ssize_ = 0;
+        arr.data_ = nullptr;
     }
     return *this;
 }
