@@ -14,9 +14,11 @@ public:
     MatrixS(const MatrixS&);
     MatrixS& operator=(const MatrixS&);
     MatrixS(std::initializer_list<std::initializer_list<int>> lst);
+    MatrixS& operator=(std::initializer_list<std::initializer_list<int>> lst);
 
     MatrixS(MatrixS&& mat);
     MatrixS& operator=(MatrixS&& mat);
+
     
     ~MatrixS();
 
