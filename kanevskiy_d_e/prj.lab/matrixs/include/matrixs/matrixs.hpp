@@ -5,16 +5,17 @@
 #include <initializer_list>
 #include <tuple>
 
+using SizeType = std::tuple<std::ptrdiff_t, std::ptrdiff_t>;
 class MatrixS {
 public:
-    using SizeType = std::tuple<std::ptrdiff_t, std::ptrdiff_t>;
     MatrixS() = default;
-    explicit MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns);
-    explicit MatrixS(const SizeType& size);
+    MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns);
+    explicit MatrixS(const SizeType& size = {0, 0});
     MatrixS(const MatrixS&);
     MatrixS& operator=(const MatrixS&);
     MatrixS(std::initializer_list<std::initializer_list<int>> lst);
     MatrixS& operator=(std::initializer_list<std::initializer_list<int>> lst);
+    //MatrixS(std::initializer_list<std::ptrdiff_t>& lst);
 
     MatrixS(MatrixS&& mat);
     MatrixS& operator=(MatrixS&& mat);
@@ -38,9 +39,9 @@ public:
     // const int& operator()(const std::ptrdiff_t & row, const std::ptrdiff_t& column) const;
 
 private:
-    std::ptrdiff_t rows_ = 0;
-    std::ptrdiff_t columns_ = 0;
-    SizeType size_ = { 0, 0 };
+    std::ptrdiff_t rows_{ 0 };
+    std::ptrdiff_t columns_{ 0 };
+    SizeType size_ { 0, 0 };
     int* data_ = nullptr;
 };
 #endif

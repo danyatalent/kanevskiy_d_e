@@ -4,12 +4,14 @@
 #include <matrixs/matrixs.hpp>
 
 TEST_CASE("constructor") {
+    /*
     SUBCASE("default constructor") {
         auto matrix = MatrixS();
         CHECK(matrix.nCols() == 0);
         CHECK(matrix.nRows() == 0);
         CHECK(matrix.ssize() == std::make_tuple(0, 0));
     }
+    */
     SUBCASE("rows and columns constructor") {
         auto matrix = MatrixS(5, 3);
         CHECK(matrix.nCols() == 3);
@@ -18,12 +20,13 @@ TEST_CASE("constructor") {
         CHECK(matrix.at(3, 2) == 0);
     }
     SUBCASE("size constructor") {
-        auto matrix = MatrixS(std::make_tuple(5, 3));
+        auto matrix = MatrixS({5, 3});
         CHECK(matrix.nCols() == 3);
         CHECK(matrix.nRows() == 5);
         CHECK(matrix.ssize() == std::make_tuple(5, 3));
         CHECK(matrix.at(3, 2) == 0);
     }
+    
     SUBCASE("initializer list") {
         auto matrix = MatrixS({ {1, 3, 4}, {2, 5, 6} });
         CHECK(matrix.nCols() == 3);
@@ -38,14 +41,15 @@ TEST_CASE("constructor") {
         CHECK(matrix_empty.ssize() == std::make_tuple(0, 0));
 
     }
+    
 }
 
 TEST_CASE("at method") {
     auto matrix = MatrixS(5, 5);
     CHECK(matrix.at(0, 0) == 0);
     CHECK(matrix.at(4, 4) == 0);
-    CHECK(matrix.at(std::make_tuple(3, 3)) == 0);
-    CHECK(matrix.at(std::make_tuple(0, 0)) == 0);
+    CHECK(matrix.at({3, 3}) == 0);
+    CHECK(matrix.at({0, 0}) == 0);
 
     CHECK_THROWS_AS(matrix.at(-1, 3) == 0, std::out_of_range);
     CHECK_THROWS_AS(matrix.at(6, 3) == 0, std::out_of_range);

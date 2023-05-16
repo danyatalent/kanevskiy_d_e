@@ -19,6 +19,21 @@ MatrixS::MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns)
         data_[i] = 0;
     }
 }
+/*
+MatrixS::MatrixS(std::initializer_list<std::ptrdiff_t>& lst) {
+    if (lst.size() == 2) {
+        std::ptrdiff_t m = *(lst.begin());
+        std::ptrdiff_t n = *(lst.end());
+        rows_ = m;
+        columns_ = n;
+        size_ = std::make_tuple(m, n);
+        data_ = new int[rows_ * columns_];
+        for (std::ptrdiff_t i = 0; i < rows_ * columns_; i += 1) {
+            data_[i] = 0;
+        }
+    }
+}
+*/
 
 MatrixS::MatrixS(const MatrixS& rhs) {
     size_ = rhs.size_;
@@ -210,6 +225,6 @@ std::ptrdiff_t MatrixS::nRows() const noexcept {
     return rows_;
 }
 
-const MatrixS::SizeType& MatrixS::ssize() const noexcept{
+const SizeType& MatrixS::ssize() const noexcept{
     return size_;
 }
