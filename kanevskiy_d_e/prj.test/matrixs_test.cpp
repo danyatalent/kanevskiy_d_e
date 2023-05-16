@@ -4,14 +4,14 @@
 #include <matrixs/matrixs.hpp>
 
 TEST_CASE("constructor") {
-    /*
+    
     SUBCASE("default constructor") {
         auto matrix = MatrixS();
         CHECK(matrix.nCols() == 0);
         CHECK(matrix.nRows() == 0);
         CHECK(matrix.ssize() == std::make_tuple(0, 0));
     }
-    */
+    
     SUBCASE("rows and columns constructor") {
         auto matrix = MatrixS(5, 3);
         CHECK(matrix.nCols() == 3);

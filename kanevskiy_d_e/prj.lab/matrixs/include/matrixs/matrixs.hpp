@@ -10,7 +10,7 @@ class MatrixS {
 public:
     MatrixS() = default;
     MatrixS(const std::ptrdiff_t& rows, const std::ptrdiff_t& columns);
-    explicit MatrixS(const SizeType& size = {0, 0});
+    explicit MatrixS(const SizeType& size);
     MatrixS(const MatrixS&);
     MatrixS& operator=(const MatrixS&);
     MatrixS(std::initializer_list<std::initializer_list<int>> lst);
